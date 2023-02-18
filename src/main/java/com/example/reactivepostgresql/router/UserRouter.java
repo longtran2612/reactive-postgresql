@@ -19,11 +19,11 @@ public class UserRouter {
     public RouterFunction<ServerResponse> userRoute(UserHandle userHandle){
         return route()
                 .nest(path("/user"), builder -> builder
-                        .GET("/{id}", userHandle::getById)
-                        .GET("/all", userHandle::getAll)
-                        .POST("", userHandle::create)
-                        .PUT("/{id}", userHandle::update)
-                        .DELETE("/{id}", userHandle::deleteById)
+                        .GET("/get-by-id/{id}", userHandle::getById)
+                        .GET("/get-all", userHandle::getAll)
+                        .POST("/create", userHandle::create)
+                        .PUT("/update/{id}", userHandle::update)
+                        .DELETE("/delete/{id}", userHandle::deleteById)
                 ).build();
     }
 }

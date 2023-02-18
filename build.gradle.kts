@@ -35,6 +35,9 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-validation:3.0.2")
     // https://mvnrepository.com/artifact/javax.persistence/javax.persistence-api
     implementation("javax.persistence:javax.persistence-api:2.2")
+    // https://mvnrepository.com/artifact/org.postgresql/postgresql
+    implementation("org.postgresql:postgresql")
+
 
 
 
