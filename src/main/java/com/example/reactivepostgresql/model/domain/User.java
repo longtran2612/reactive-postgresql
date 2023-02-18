@@ -1,6 +1,8 @@
 package com.example.reactivepostgresql.model.domain;
 
+import com.example.reactivepostgresql.base.BaseModel;
 import lombok.*;
+import lombok.experimental.SuperBuilder;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
@@ -13,15 +15,11 @@ import org.springframework.data.relational.core.mapping.Table;
 
 @Setter
 @Getter
-@Builder
+@SuperBuilder
 @AllArgsConstructor
 @NoArgsConstructor
 @Table("users")
-public class User {
-
-    @Id
-    @Column("id")
-    private String id;
+public class User extends BaseModel {
 
     private String name;
 

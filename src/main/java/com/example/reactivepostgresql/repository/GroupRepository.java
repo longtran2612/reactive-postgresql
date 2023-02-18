@@ -8,5 +8,5 @@ import org.springframework.data.r2dbc.repository.R2dbcRepository;
  * Long Tran
  */
 
-public interface GroupRepository extends R2dbcRepository<Group,Long> {
+public interface GroupRepository extends R2dbcRepository<Group,String> {
 }

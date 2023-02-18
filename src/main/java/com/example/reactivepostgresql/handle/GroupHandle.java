@@ -1,5 +1,6 @@
 package com.example.reactivepostgresql.handle;
 
+import com.example.reactivepostgresql.base.BaseHandle;
 import com.example.reactivepostgresql.model.domain.Group;
 import com.example.reactivepostgresql.model.domain.User;
 import com.example.reactivepostgresql.repository.GroupRepository;
@@ -18,15 +19,13 @@ import reactor.core.publisher.Mono;
  */
 @Component
 @RequiredArgsConstructor
-@Slf4j
-public class GroupHandle {
+public class GroupHandle extends BaseHandle {
 
     private final GroupRepository groupRepository;
 
-    private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
     public Mono<ServerResponse> getById(ServerRequest request){
-        return ServerResponse.ok().body(groupRepository.findById(Long.valueOf(request.pathVariable("id"))), Group.class);
+        return ServerResponse.ok().body(groupRepository.findById(request.pathVariable("id")), Group.class);
     }
     public Mono<ServerResponse> getAll(ServerRequest request){
         return ServerResponse.ok().body(groupRepository.findAll(), Group.class);
@@ -35,7 +34,7 @@ public class GroupHandle {
     @Transactional(rollbackFor = Exception.class)
     public Mono<ServerResponse> create(ServerRequest request){
         return request.bodyToMono(Group.class)
-                .flatMap(r2dbcEntityTemplate::insert)
+                .flatMap(groupRepository::save)
                 .flatMap(group -> ServerResponse.ok().body(Mono.just(group), Group.class));
     }
 }

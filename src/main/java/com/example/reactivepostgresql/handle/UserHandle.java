@@ -1,5 +1,6 @@
 package com.example.reactivepostgresql.handle;
 
+import com.example.reactivepostgresql.base.BaseHandle;
 import com.example.reactivepostgresql.model.domain.User;
 import com.example.reactivepostgresql.model.dto.request.UpdateUserRequest;
 import com.example.reactivepostgresql.repository.UserRepository;
@@ -22,10 +23,8 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UserHandle {
+public class UserHandle   extends BaseHandle {
     private final UserRepository userRepository;
-
-    private final R2dbcEntityTemplate r2dbcEntityTemplate;
 
 
     public Mono<ServerResponse> getById(ServerRequest request){
