@@ -6,7 +6,9 @@ import com.example.reactivepostgresql.model.dto.request.user.CreateUserRequest;
 import com.example.reactivepostgresql.model.dto.request.user.UpdateUserRequest;
 import com.example.reactivepostgresql.repository.UserRepository;
 import com.example.reactivepostgresql.utils.MappingUtils;
+import jakarta.validation.Validator;
 import lombok.RequiredArgsConstructor;
+import org.apache.commons.lang3.Validate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import reactor.core.publisher.Flux;
@@ -31,6 +33,7 @@ public class UserService extends BaseService {
 
     @Transactional(rollbackFor = Exception.class)
     public Mono<User> create(CreateUserRequest request) {
+        validate(request);
         var user = MappingUtils.mapObject(request, User.class);
 //        user.setId(sequenceValueService.getSequence(User.class));
 //       return sequenceValueService.getSequence(User.class).flatMap(id -> {
@@ -52,6 +55,7 @@ public class UserService extends BaseService {
     public Mono<Void> deleteById(String id) {
         return userRepository.deleteById(id);
     }
+
 
 
 }
