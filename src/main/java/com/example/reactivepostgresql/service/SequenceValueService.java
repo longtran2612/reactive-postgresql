@@ -6,9 +6,11 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.data.r2dbc.repository.R2dbcRepository;
 import org.springframework.stereotype.Service;
+import reactor.core.publisher.Mono;
 
 import java.time.LocalDate;
 import java.util.Date;
+import java.util.Objects;
 
 /**
  * 9:45 PM 18-Feb-23
@@ -22,21 +24,22 @@ public class SequenceValueService {
 
     private final SequenceValueRepository sequenceValueRepository;
 
-    public  String getSequence(Class forClass) {
+    public Mono<String> getSequence(Class forClass) {
         String sequenceName = forClass.getName();
-        SequenceValue sequenceValueItem = sequenceValueRepository.findById(sequenceName).block();
-        if (null == sequenceValueItem) {
-            sequenceValueItem = new SequenceValue();
-            sequenceValueItem.setId(sequenceName);
-            sequenceValueItem.setSeqId(1000);
-            sequenceValueItem.setCreatedDate(LocalDate.now());
-            sequenceValueRepository.save(sequenceValueItem);
-            return "1000";
-        }
-        int sequenceId = sequenceValueItem.getSeqId() + 1;
-        sequenceValueItem.setSeqId(sequenceId);
-        sequenceValueItem.setUpdatedDate(LocalDate.now());
-        sequenceValueRepository.save(sequenceValueItem);
-        return String.valueOf(sequenceId);
+        Mono<SequenceValue> sequenceValueItem = sequenceValueRepository.findById(sequenceName).flatMap(sequenceValue -> {
+           if(Objects.isNull(sequenceValue)) {
+               sequenceValue = new SequenceValue();
+               sequenceValue.setSeqId(1000);
+               sequenceValue.setCreatedDate(LocalDate.now());
+           }else{
+               int sequenceId = sequenceValue.getSeqId() + 1;
+                sequenceValue.setSeqId(sequenceId);
+                sequenceValue.setUpdatedDate(LocalDate.now());
+           }
+            return sequenceValueRepository.save(sequenceValue);
+        });
+        return sequenceValueItem.map(sequenceValue -> {
+            return String.valueOf(sequenceValue.getSeqId());
+        });
     }
 }

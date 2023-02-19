@@ -32,7 +32,11 @@ public class UserService extends BaseService {
     @Transactional(rollbackFor = Exception.class)
     public Mono<User> create(CreateUserRequest request) {
         var user = MappingUtils.mapObject(request, User.class);
-        user.setId(sequenceValueService.getSequence(User.class));
+//        user.setId(sequenceValueService.getSequence(User.class));
+//       return sequenceValueService.getSequence(User.class).flatMap(id -> {
+////            user.setId(id);
+//            return userRepository.save(user);
+//        }).log();
         return userRepository.save(user);
     }
 

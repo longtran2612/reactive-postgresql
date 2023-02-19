@@ -36,9 +36,12 @@ public class GroupService extends BaseService {
 
     @Transactional(rollbackFor = Exception.class)
     public Mono<Group> create(CreateGroupRequest request) {
-        var user = MappingUtils.mapObject(request, Group.class);
-        user.setId(sequenceValueService.getSequence(Group.class));
-        return groupRepository.save(user);
+        var group = MappingUtils.mapObject(request, Group.class);
+//        return  sequenceValueService.getSequence(Group.class).flatMap(id -> {
+//            group.setId(id);
+//            return groupRepository.save(group);
+//        });
+        return groupRepository.save(group);
     }
 
     @Transactional(rollbackFor = Exception.class)
