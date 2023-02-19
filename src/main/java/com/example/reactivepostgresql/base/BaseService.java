@@ -1,6 +1,5 @@
 package com.example.reactivepostgresql.base;
 
-import com.example.reactivepostgresql.repository.SequenceValueRepository;
 import com.example.reactivepostgresql.service.SequenceValueService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
@@ -11,7 +10,7 @@ import org.springframework.stereotype.Component;
  * Long Tran
  */
 @Component
-public class BaseHandle extends BaseObjectLoggable{
+public class BaseService extends BaseObjectLoggable{
     @Autowired
     protected R2dbcEntityTemplate r2dbcEntityTemplate;
 

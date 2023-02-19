@@ -1,6 +1,6 @@
 package com.example.reactivepostgresql.router;
 
-import com.example.reactivepostgresql.handle.GroupHandle;
+import com.example.reactivepostgresql.handle.GroupService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -17,7 +17,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class GroupRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> groupRoute(GroupHandle groupHandle) {
+    public RouterFunction<ServerResponse> groupRoute(GroupService groupHandle) {
         return route().
                 nest(path("/group"), builder -> builder
                         .GET("/get-by-id/{id}", groupHandle::getById)

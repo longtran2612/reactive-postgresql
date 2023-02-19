@@ -1,12 +1,9 @@
 package com.example.reactivepostgresql.handle;
 
-import com.example.reactivepostgresql.base.BaseHandle;
+import com.example.reactivepostgresql.base.BaseService;
 import com.example.reactivepostgresql.model.domain.Group;
-import com.example.reactivepostgresql.model.domain.User;
 import com.example.reactivepostgresql.repository.GroupRepository;
 import lombok.RequiredArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -19,7 +16,7 @@ import reactor.core.publisher.Mono;
  */
 @Component
 @RequiredArgsConstructor
-public class GroupHandle extends BaseHandle {
+public class GroupService extends BaseService {
 
     private final GroupRepository groupRepository;
 

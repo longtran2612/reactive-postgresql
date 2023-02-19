@@ -1,12 +1,11 @@
 package com.example.reactivepostgresql.handle;
 
-import com.example.reactivepostgresql.base.BaseHandle;
+import com.example.reactivepostgresql.base.BaseService;
 import com.example.reactivepostgresql.model.domain.User;
 import com.example.reactivepostgresql.model.dto.request.UpdateUserRequest;
 import com.example.reactivepostgresql.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.data.r2dbc.core.R2dbcEntityTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.reactive.function.server.ServerRequest;
@@ -14,7 +13,6 @@ import org.springframework.web.reactive.function.server.ServerResponse;
 import reactor.core.publisher.Mono;
 
 import java.util.Optional;
-import java.util.UUID;
 
 /**
  * 2:04 PM 18-Feb-23
@@ -23,7 +21,7 @@ import java.util.UUID;
 @Component
 @RequiredArgsConstructor
 @Slf4j
-public class UserHandle   extends BaseHandle {
+public class UserService extends BaseService {
     private final UserRepository userRepository;
 
 

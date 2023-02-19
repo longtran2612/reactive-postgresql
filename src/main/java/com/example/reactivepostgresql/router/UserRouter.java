@@ -1,6 +1,6 @@
 package com.example.reactivepostgresql.router;
 
-import com.example.reactivepostgresql.handle.UserHandle;
+import com.example.reactivepostgresql.handle.UserService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.reactive.function.server.RouterFunction;
@@ -16,7 +16,7 @@ import static org.springframework.web.reactive.function.server.RouterFunctions.r
 public class UserRouter {
 
     @Bean
-    public RouterFunction<ServerResponse> userRoute(UserHandle userHandle){
+    public RouterFunction<ServerResponse> userRoute(UserService userHandle){
         return route()
                 .nest(path("/user"), builder -> builder
                         .GET("/get-by-id/{id}", userHandle::getById)
