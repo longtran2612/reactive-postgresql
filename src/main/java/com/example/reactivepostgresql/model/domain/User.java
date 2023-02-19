@@ -3,8 +3,6 @@ package com.example.reactivepostgresql.model.domain;
 import com.example.reactivepostgresql.base.BaseModel;
 import lombok.*;
 import lombok.experimental.SuperBuilder;
-import org.springframework.data.annotation.Id;
-import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 
 

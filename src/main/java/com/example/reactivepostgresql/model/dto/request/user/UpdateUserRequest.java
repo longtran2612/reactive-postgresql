@@ -1,4 +1,4 @@
-package com.example.reactivepostgresql.model.dto.request;
+package com.example.reactivepostgresql.model.dto.request.user;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.*;
